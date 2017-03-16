@@ -97,7 +97,7 @@ Assuming ssh protocol is setup to be used with GitHub, the Metropolis_gslab them
 ```
 git clone git@github.com:gslab-econ/mtheme
 sudo mkdir -p /usr/local/texlive/texmf-local/tex/latex/beamer/themes/gslab
-rm -f /usr/local/texlive/texmf-local/tex/latex/beamer/themes/gslab
+rm -f /usr/local/texlive/texmf-local/tex/latex/beamer/themes/gslab/*.sty
 sudo mv mtheme/*_gslab.sty /usr/local/texlive/texmf-local/tex/latex/beamer/themes/gslab
 rm -rf mtheme
 sudo texhash
