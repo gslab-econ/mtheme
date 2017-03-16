@@ -82,3 +82,57 @@ does not affect the presentation that you create with the theme.
 [demo slides]: http://mirrors.ctan.org/macros/latex/contrib/beamer-contrib/themes/metropolis/demo/demo.pdf
 [manual]: http://mirrors.ctan.org/macros/latex/contrib/beamer-contrib/themes/metropolis/doc/metropolistheme.pdf
 [CTAN]: http://ctan.org/pkg/beamertheme-metropolis
+
+
+
+-------
+# gslab_latex
+
+This repository houses a modified version of the [Metropolis Beamer Theme](https://github.com/matze/mtheme).
+
+## Installation
+
+Assuming ssh protocol is setup to be used with GitHub, the Metropolis_gslab theme can be installed using the following (WARNING: `sudo` is used.):
+
+```
+git clone git@github.com:gslab-econ/mtheme
+sudo mkdir -p /usr/local/texlive/texmf-local/tex/latex/beamer/themes/gslab
+rm -f /usr/local/texlive/texmf-local/tex/latex/beamer/themes/gslab
+sudo mv mtheme/*.sty /usr/local/texlive/texmf-local/tex/latex/beamer/themes/gslab
+rm -rf mtheme
+sudo texhash
+```
+
+## Origin
+
+Repository is a fork of the [Metropolis Beamer Theme](https://github.com/matze/mtheme) directory.
+
+### Steps used to obtain the *.sty files from the mtheme-master folder
+
+1. Open Terminal and set current directory to root of mtheme repo.
+2. Type `make sty` to the command line.
+3. In root, there should be 7 .sty files. 
+
+### Further customization done directly to output
+
+- Files are renamed to have the _gslab suffix.
+- Files in ./output is copied and pasted from the above steps, but beamerinnerthememetropolis_gslab.sty has a single change in line 251 where the line spacing to 1.15 instead of the defaul 1 is commented out.
+- Files in beamercolorthememetropolis_gslab.sty is modified so the background color is white instead of light grey.
+- A brief note regarding the files being modified and following the same license as the originals was also added.
+
+## License
+
+The modified content in this repository is licensed under a [Creative Commons Attribution-ShareAlike4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/). We inherit this license from the original Metropolis Beamer Theme. This license permits others to use, share, and modify content as long as 
+
+  *  Appropriate credit is given to the creator.
+  *  All subsequent work retains the copyright notice and is made available under the same license. 
+      * "This means that if you change the theme and re-distribute it, you must retain the copyright notice header and license it under the same CC-BY-SA license. This does not affect the presentation that you create with the theme."
+
+Also note that
+
+  *  This content is provided "as is," without warranty of any kind, express or implied.
+  *  This license does not affect the presentation that you create with the theme.
+
+The [original creator](https://github.com/matze/mtheme) in no way endorses the content in this repository or the [GSLab organization](https://github.com/gslab-econ). 
+
+
