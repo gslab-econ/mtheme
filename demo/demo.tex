@@ -1,7 +1,6 @@
 \documentclass[10pt]{beamer}
 
 \usetheme{metropolis}
-\usepackage{appendixnumberbeamer}
 
 \usepackage{booktabs}
 \usepackage[scale=2]{ccicons}
@@ -17,7 +16,7 @@
 \date{\today}
 \author{Matthias Vogelgesang}
 \institute{Center for modern beamer themes}
-% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo/logo}}
 
 \begin{document}
 
@@ -66,7 +65,7 @@
 \end{frame}
 
 {
-    \metroset{titleformat frame=smallcaps}
+\metroset{titleformat frame=smallcaps}
 \begin{frame}{Small caps}
 	This frame uses the \texttt{smallcaps} titleformat.
 
@@ -185,7 +184,7 @@ or show \textbf{bold} results.\end{verbatim}
 \begin{frame}{Tables}
   \begin{table}
     \caption{Largest cities in the world (source: Wikipedia)}
-    \begin{tabular}{@{} lr @{}}
+    \begin{tabular}{lr}
       \toprule
       City & Population\\
       \midrule
@@ -281,14 +280,6 @@ or show \textbf{bold} results.\end{verbatim}
   \end{quote}
 \end{frame}
 
-{%
-\setbeamertemplate{frame footer}{My custom footer}
-\begin{frame}[fragile]{Frame footer}
-    \themename defines a custom beamer template to add a text to the footer. It can be set via
-    \begin{verbatim}\setbeamertemplate{frame footer}{My custom footer}\end{verbatim}
-\end{frame}
-}
-
 \begin{frame}{References}
   Some references to showcase [allowframebreaks] \cite{knuth92,ConcreteMath,Simpson,Er01,greenwade93}
 \end{frame}
@@ -309,22 +300,7 @@ or show \textbf{bold} results.\end{verbatim}
 
 \end{frame}
 
-\begin{frame}[standout]
-  Questions?
-\end{frame}
-
-\appendix
-
-\begin{frame}[fragile]{Backup slides}
-  Sometimes, it is useful to add slides at the end of your presentation to
-  refer to during audience questions.
-
-  The best way to do this is to include the \verb|appendixnumberbeamer|
-  package in your preamble and call \verb|\appendix| before your backup slides.
-
-  \themename will automatically turn off slide numbering and progress bars for
-  slides in the appendix.
-\end{frame}
+\plain{Questions?}
 
 \begin{frame}[allowframebreaks]{References}
 

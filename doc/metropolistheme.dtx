@@ -37,7 +37,7 @@
     \suppressfontnotfounderror=0%
   }
 
-  \newcommand{\iffontsavailable}[3]{%
+  \newcommand{\iffontsexist}[3]{%
     \setcounter{fontsnotfound}{0}%
     \expandafter\forcsvlist\expandafter%
     \checkfont\expandafter{#1}%
@@ -47,13 +47,13 @@
       #3%
     \fi%
   }
-  \iffontsavailable{Fira Sans Light,%
+  \iffontsexist{Fira Sans Light,%
                 Fira Sans Light Italic,%
                 Fira Sans,%
                 Fira Sans Italic}{%
     \setmainfont[BoldFont={Fira Sans}]{Fira Sans Light}%
   }{%
-    \iffontsavailable{Fira Sans Light OT,%
+    \iffontsexist{Fira Sans Light OT,%
                   Fira Sans Light Italic OT,%
                   Fira Sans OT,%
                   Fira Sans Italic OT}{%
@@ -65,10 +65,10 @@
       }
     }
   }
-  \iffontsavailable{Fira Mono, Fira Mono Bold}{%
+  \iffontsexist{Fira Mono, Fira Mono Bold}{%
     \setmonofont{Fira Mono}%
   }{%
-    \iffontsavailable{Fira Mono OT, Fira Mono Bold OT}{%
+    \iffontsexist{Fira Mono OT, Fira Mono Bold OT}{%
       \setmonofont{Fira Mono OT}%
     }{%
       \typeout{%
@@ -125,7 +125,6 @@
                 plain,setbeamercolor,metroset,setsansfont,setmonofont},
 }
 \lstMakeShortInline|
-\usepackage{metalogo}
 
 \usepackage[colorlinks=true,
             linkcolor=mLightBrown,
@@ -145,25 +144,23 @@
 
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
-\usepackage{readprov}
-\ReadPackageInfos{beamerthememetropolis}
-
+\GetFileInfo{beamerthememetropolis.dtx}
 \title{Modern Beamer Presentations with the \themename package}
 \author{Matthias Vogelgesang \\ \url{matthias.vogelgesang@gmail.com}}
-\date{\fileversion~---~\filedate}
+\date{v1.0 -- 2015/12/04}
 
 \begin{document}
 
 \maketitle
 \tableofcontents
 
-
 \section{Introduction}
 
 Beamer is an awesome way to make presentations with LaTeX, but its theme
-selection is surprisingly sparse. The stock themes share an aesthetic that can
-be a little cluttered, while the few distinctive custom themes available are
-often specialized for a particular corporate or institutional brand.
+selection is surprisingly sparse. The stock themes share an aesthetic that is
+now overused and can be a little cluttered, and the few distinctive custom
+themes available are often specialized for a particular corporate or
+institutional brand.
 
 The goal of \themename is to provide a simple, modern Beamer theme suitable
 for anyone to use. It tries to minimize noise and maximize space for content;
@@ -174,7 +171,7 @@ By default, \themename uses
 \href{https://www.mozilla.org/en-US/styleguide/products/firefox-os/typeface/}
 {Fira Sans}, a gorgeous typeface commissioned by Mozilla and designed by
 \href{http://www.carrois.com/fira-3-1/}{Carrois}. For best results, you will
-need the Fira typeface installed and use \XeLaTeX\ to typeset your slides.
+need the Fira typeface installed and use Xe\LaTeX{} to typeset your slides.
 However, \themename can also be used with other typefaces and \LaTeX{} build
 systems.
 
@@ -188,37 +185,25 @@ the theme even better, please get in touch there. The
 \section{Getting Started}
 
 \subsection{Installing from CTAN}
-
-For most users, we recommend installing \themename from
-\href{https://www.ctan.org}{CTAN}. If you keep your \TeX\ distribution
-up-to-date, chances are good that \themename is already installed. If it is
-not, you need to update your packages. If your distribution is \TeX\ Live
-(or Mac\TeX\ on OS X), the following command updates all packages.
-
-\begin{lstlisting}
-tlmgr update --all
-\end{lstlisting}
-
-If this results in an error, you may need to run it with administrative privileges:
+For the regular user it is recommended to install \themename from
+\href{https://www.ctan.org}{CTAN}. In case you keep your \TeX\ distribution
+up-to-date, chances are good that \themename is already installed. If it is not,
+you need to update your packages. For  \TeX\ Live (or Mac\TeX\ on OS X) the
+following command updates all packages.
 
 \begin{lstlisting}
 sudo tlmgr update --all
 \end{lstlisting}
 
-Mac\TeX\ on OS X also provides a graphical interface for |tlmgr| called
-\TeX\ Live Utility.
+For any other distribution please refer to its documentation on how to update your
+packages.
 
-For any other distribution please refer to its documentation on how to update
-your packages.
-
-To get the most out of the theme you should also install the |Fira| fonts.
-However, this is not mandatory; \themename also works with the standard fonts.
-
+To get the most out of the theme you should also install the |Fira| fonts. Yet this
+is not mandatory. \themename also works with the standard fonts.
 
 \subsection{Installing from GitHub}
 
-If you want to use the cutting-edge development version of \themename, you can
-install it manually. Like any \LaTeX\ package, this involves four easy steps:
+Installing \themename, like any Beamer theme, involves four easy steps:
 \begin{description}
   \item[Download the source] with a |git clone| of the
     \href{https://github.com/matze/mtheme}{\themename repository} or as a
@@ -245,12 +230,17 @@ options for advanced users:
   \item[|make doc|] builds this documentation manual.
   \item[|make demo|] builds a demo presentation to test the features of
     \themename.
-  \item[|make all|] builds the theme and manual.
+  \item[|make all|] builds the theme, manual, and demo presentation.
   \item[|make clean|] removes the files generated by |make all|.
   \item[|make install|] installs the theme into your local texmf folder.
   \item[|make uninstall|] removes the theme from your local texmf folder.
+  \item[|make ctan|] creates a package for CTAN distribution.
 \end{description}
 
+\subsection{Installing the Debian Package}
+As an alternative users of Debian or Ubuntu can also install this
+\href{https://launchpad.net/\%7Eedd/+archive/ubuntu/misc/+files/latex-mtheme_0.1.0vidid1_all.deb}{.deb package}
+containing the theme files as well as the Fira Sans font files.
 
 \subsection{A Minimal Example}
 
@@ -276,28 +266,17 @@ The following code shows a minimal example of a Beamer presentation using
 
 \subsection{Dependencies}
 
-\themename depends on the |beamer| class and the following standard packages:
-\begin{multicols}{3}
-  \begin{itemize}
-    \item |tikz|
-    \item |pgfopts|
-    \item |etoolbox|
-    \item |calc|
-    \item |ifxetex|
-    \item |ifluatex|
-  \end{itemize}
-\end{multicols}
+\begin{itemize}
+  \item TikZ
+  \item XeLaTeX or LuaTeX
+  \item \href{https://github.com/mozilla/Fira}{Fira Sans} and Mono font
+\end{itemize}
 
-For best results, we recommend installing the fonts
-\href{https://github.com/mozilla/Fira}{|Fira Sans|} and |Fira Mono|
-and compiling with \themename using \XeLaTeX\ or \LuaTeX.
-These are optional dependencies; \themename is compatible with (e.g.)
-pdf\LaTeX\ and will fall back to standard fonts if |Fira Sans| or |Fira Mono|
-is not installed.
-
-The packaged name of |Fira Sans| is |Fira Sans OT| in some Linux
-distributions; this case is automatically handled by \themename.
-
+The |Fira Sans| font is not a hard dependency. \themename will try to load the
+font and use it if it is installed, but if not it will just use the standard
+font. Depending on the Linux distribution, the packaged name of |Fira Sans|
+might be |Fira Sans OT| instead of |Fira Sans|. \themename will check for this
+name too.
 
 \subsection{Pandoc}
 
@@ -309,105 +288,113 @@ $ pandoc -t beamer --latex-engine=xelatex -V theme:metropolis -o output.pdf inpu
 \end{lstlisting}
 
 
+
+
 \section{Customization}
-
 \subsection{Package options}
-
-The theme provides a number of options, which can be set using a key=value
-interface. The primary way to set options is to provide a comma-separated list
-of option-value pairs when loading \themename in the preamble:
+The theme provides a number of options. The options use a key=value interface.
+So every option is controlled by a key its value. To use an option you can
+either provide a comma separated list of options when invoking
+\textsc{metropolis} in the preamble of the presentation.
 \begin{lstlisting}
-\usetheme[option1=value1, option2=value2, ...]{metropolis}
+\usetheme[<key=value list>]{metropolis}
 \end{lstlisting}
-
-Options can be changed at any time --- even mid-presentation! --- with the
-|\metroset| macro.
+Or you can set them at any time with the |\metroset| macro.
 \begin{lstlisting}
-\metroset{option1=newvalue1, option2=newvalue2, ...}
+\metroset{<key=value list>}
 \end{lstlisting}
-
+To set an option on a specific sub-package only you have to add the
+corresponding prefix (inner, outer, color), e.g.
+\begin{lstlisting}
+\metroset{inner/block=fill}
+\end{lstlisting}
 The list of options is structured as shown in the following example.
 
-\DescribeOption{option key}{list of possible values}{default}{
+\DescribeOption{key}{list of possible values}{default value}{
   A short description of the option.
 }
 
+Although the options are grouped into the corresponding packages every option
+can and in most cases should be set on the main theme directly. If an option
+is listed in multiple sub-packages, setting it on the main theme will set the
+option on every sub-package accordingly.
 
 \subsubsection{Main theme}
-
 \DescribeOption{titleformat}%
                {regular, smallcaps, allsmallcaps, allcaps}
                {regular}{
-  Changes the format of titles, subtitles, section titles, frame titles, and
-  the text on ``standout'' frames. The available options produce
-  Regular, \textsc{SmallCaps}, \textsc{\MakeLowercase{AllSmallCaps}}, or
-  \MakeUppercase{AllCaps} titles. Please refer to
-  Section~\ref{sec:titleformats} for known issues with these options.
+  Shortcut option to change the titleformat of all titles together. Please
+  refer to section \ref{sec:titleformats} for known issues.
 }
 
 \DescribeOption{titleformat plain}%
                {regular, smallcaps, allsmallcaps, allcaps}%
                {regular}{
-  Changes the format of ``standout'' frames (see |titleformat|, above).
+  Control the titleformat of the plain title. Please refer to section
+  \ref{sec:titleformats} for known issues.
 }
-
 
 \subsubsection{Inner theme}
+\DescribeOption{block}{transparent, fill}{transparent}{
+  This option controls the block background. It can either be filled with a
+  light grey or be transparent.
+}
 
 \DescribeOption{sectionpage}{none, simple, progressbar}{progressbar}{
-  Adds a slide at the start of each section (|simple|) with an optional thin
-  progress bar below the section title (|progressbar|). The |none| option
-  disables the section page.
+  Disable section pages at all, typeset centered section title or add a thin
+  progress bar below the centered section title.
 }
 
-\DescribeOption{subsectionpage}{none, simple, progressbar}{none}{
-  Optionally adds a slide at the start of each subsection. If enabled with
-  the |simple| or |progressbar| options, the style of the |section page| will
-  be updated to match the style of the |subsection page|. Note that section
-  slides and subsection slides can appear consecutively if both are enabled;
-  you may want to use this option together with |sectionpage=none| depending
-  on the section structure of your presentation.
+\DescribeOption{titleformat title}%
+               {regular, smallcaps, allsmallcaps, allcaps}%
+               {regular}{
+  Control the titleformat of the title. Please refer to section
+  \ref{sec:titleformats} for known issues.
 }
 
+\DescribeOption{titleformat subtitle}%
+               {regular, smallcaps, allsmallcaps, allcaps}%
+               {regular}{
+  Control the titleformat of the subtitle. Please refer to section
+  \ref{sec:titleformats} for known issues.
+}
+
+\DescribeOption{titleformat section}%
+               {regular, smallcaps, allsmallcaps, allcaps}%
+               {regular}{
+  Control the titleformat of the section title. Please refer to section
+  \ref{sec:titleformats} for known issues.
+}
 
 \subsubsection{Outer theme}
-
 \DescribeOption{numbering}{none, counter, fraction}{counter}{
-  Controls whether the frame number at the bottom right of each slide is
-  omitted (|none|), shown (|counter|) or displayed as a fraction of the total
-  number of frames (|fraction|).
+  In the bottom right corner of each frame the current frame number is
+  displayed. This can be disabled or the total framenumber can be added
+  additionally.
 }
 
 \DescribeOption{progressbar}{none, head, frametitle, foot}{none}{
-  Optionally adds a progress bar to the top of each frame (|head|),
-  the bottom of each frame (|foot|), or directly below each frame title
-  (|frametitle|).
+  Adds a progress bar to the top of each frame (|head|), the bottom of each
+  frame (|foot|), or directly below each frame title (|frametitle|).
+}
+
+\DescribeOption{titleformat frame}%
+               {regular, smallcaps, allsmallcaps, allcaps}%
+               {regular}{
+  Control the titleformat of the frame title. Please refer to section
+  \ref{sec:titleformats} for known issues.
 }
 
 \subsubsection{Color theme}
 \DescribeOption{block}{transparent, fill}{transparent}{
-  Optionally adds a light grey background to block environments like |theorem|
-  and |example|.
+  This option controls the block background. It can either be filled with a
+  light grey or be transparent.
 }
 
 \DescribeOption{background}{dark, light}{light}{
-  Provides the option to have a dark background and light foreground instead
-  of the reverse.
+  This option defines whether the background shall be dark and the foreground
+  be light or vice versa.
 }
-
-
-\subsubsection{Font theme}
-
-\DescribeMacro{titleformat title}
-\DescribeMacro{titleformat subtitle}
-\DescribeMacro{titleformat section}
-\DescribeOption{titleformat frame}%
-               {regular, smallcaps, allsmallcaps, allcaps}%
-               {regular}{
-  Individually controls the format of titles, subtitles, section titles, and
-  frame titles (see |titleformat|, above).
-}
-
 
 \subsection{Color Customization}
 
@@ -419,7 +406,6 @@ terms of three beamer colors:
     \item |alerted text| (colored fg, should be visible against dark or light)
     \item |example text| (colored fg, should be visible against dark or light)
 \end{itemize}
-
 An easy way to customize the theme is to redefine these colors using
 
 \begin{lstlisting}
@@ -436,32 +422,24 @@ of \themename specific colors, which can also be redefined to your liking.
 \setbeamercolor{progress bar in section page}{ ... }
 \end{lstlisting}
 
-
 \subsection{Font Customization}
 
-The default font for \themename is |Fira|. This can be easily changed using
+The default font for \themename is |Fira|. Yet this can be easily changed using
 the standard font selection commands of the \textsf{fontspec} package. So if
-you prefer, for example, the \href{http://font.ubuntu.com}{|Ubuntu|} font family, just add the following two commands after loading the \themename theme.
+you for example prefer the \href{http://font.ubuntu.com}{|Ubuntu|} font family
+just add the following two commands after loading the \themename theme.
 
 \begin{lstlisting}
 \setsansfont{Ubuntu}
 \setmonofont{Ubuntu Mono}
 \end{lstlisting}
 
-If you are expecting to present in a large room or with an underpowered
-projector, you may want to change the font to a heavier weight of Fira to
-maximize readability.
-
-\begin{lstlisting}
-\setsansfont[BoldFont={Fira Sans SemiBold}]{Fira Sans Book}
-\end{lstlisting}
-
 
 \subsubsection{Old style figures}
 
 The regular \textsf{fontspec} mechanism for changing glyph appearance applies
-also to this theme. If you want to have old style figures in the text but
-regular lined figures for math, you could add the following to your preamble:
+also to this theme. In case you want to have old style figures in the text but
+regular lined figures for math, you have to add the following to your preamble:
 
 \begin{lstlisting}
 \usefonttheme{professionalfonts}   % required for mathspec
@@ -474,84 +452,41 @@ regular lined figures for math, you could add the following to your preamble:
 
 \subsection{Commands}
 
-\subsubsection{Standout frames}
-
-The \themename inner theme offers a custom frame format with large, centered
-text and an inverted background --- perfect for focusing attention on
-single sentence or image. To use it, add the key |standout| to the frame:
-
-\begin{lstlisting}
-\begin{frame}[standout]
-    Thank you!
-\end{frame}
-\end{lstlisting}
-
-
-
-\section{\texttt{pgfplots} integration}
-
-\themename comes with a set of pre-defined pgfplots styles and a color theme
-based on Paul Tol's color scheme.
-
-
-\subsection{Styles}
-
-Pass the following style keys to the axis environment to get the appropriate
-effect:
-
-\begin{macro}{mlineplot}
-  Plot regular line charts with reduced axis frames, less intrusive legend and
-  subdued grid.
-\end{macro}
-\begin{macro}{mbarplot}
-  Plot vertical bar charts in a similar way as |mlineplot| but reduce grid usage.
-\end{macro}
-\begin{macro}{horizontal mbarplot}
-  Plot horizontal bar charts.
-\end{macro}
-\begin{macro}{disable thousands separator}
-  Helper style to remove thousands separator.
+\begin{macro}{\plain}
+The \lstinline|\plain{title=[]}{<body>}| command sets a slide in with a plain
+dark background, which can be useful to focus attention on a single sentence
+or image.
 \end{macro}
 
+\subsection{Paul Tol's colors: a \texttt{pgfplots} theme}
 
-\subsection{Paul Tol colors}
+A good presentation uses colors that are
 
-A good presentation uses colors that are distinct from each other as much as
-possible as well as from black and white, can be discerned item under different
-lighting and display environments and by color-blind viewers, while matching
-well together.
+\begin{itemize}
+  \item distinct from each other as much as possible, and
+  \item distinct from black and white,
+  \item under many different lighting and display environments, and
+  \item to color-blind viewers,
+  \item all while matching well together.
+\end{itemize}
 
 In a \href{https://personal.sron.nl/~pault/colourschemes.pdf}{technical note}
 for SRON, Paul Tol proposed a palette of colors satisfying these constraints.
 The sub-package |pgfplotsthemetol| defines palettes for |pgfplots| charts
-based on Tol's work.
-
-
-\section{Tips \& Tricks}
-
-\subsection{Backup Slides}
-
-Speakers will often include extra slides at the end of their presentation to
-refer to during audience questions. One easy way to do this is to include the
-\verb|appendixnumberbeamer| package in your preamble and call \verb|\appendix| before your backup slides.
-
-\themename will automatically turn off slide numbering and progress bars for
-slides in the appendix.
+based on Tol's work. Use the |mlineplot| key to plot line data and |mbarplot|
+or horizontal |mbarplot| to plot bar charts.
 
 
 \section{Known Issues}
 
-\subsection{Title formats}
+\subsection{Titleformats}
 \label{sec:titleformats}
+If you want to use either |smallcaps| or |allsmallcaps| be aware that not
+every font supports small caps. So make sure the font you are using does.
 
-Be aware that not every font supports small caps, so the |smallcaps| or
-|allsmallcaps| options may not work if you use a font other than |Fira Sans|.
-In particular, the Computer Modern sans-serif typeface, which is used when
-\themename is compiled with pdf\LaTeX, does not have a small-caps variant.
-
-The title format options |allsmallcaps| and |allcaps| are quite nice from an
-aesthetic point of view, but their use of |\MakeLowercase| and
-|\MakeUppercase| can cause unexpected problems. For example:
+|allsmallcaps| and |allcaps| are quite nice from an aesthetic point of view,
+but they introduce some issues by using |\MakeLowercase| and |\MakeUppercase|,
+respectively.
 
 \begin{itemize}
     \item Some commands, like |\\|, do not work inside |\MakeLowercase| and
@@ -570,114 +505,19 @@ aesthetic point of view, but their use of |\MakeLowercase| and
     \href{https://github.com/matze/mtheme/issues/153}{\#153})
 \end{itemize}
 
-The |allsmallcaps| and |allcaps| options are safe to use if your titles contain
-only alphabetic characters and do not require the expansion of any macros.
-
-
-\subsection{Interactions with other color themes}
-
-\themename can be used along with any other Beamer color theme, such as
-|crane| or |seahorse|. If you wish to do this, it is usually best to include
-the \themename subpackages individually so the \themename color theme is
-never loaded. This will prevent conflicts between the \themename color theme
-and your preferred theme.
-
-For example, overriding the color theme as follows may not work as expected because |\usetheme{metropolis}| loads the \themename color theme, which
-defines a relationship between the frametitle background and the primary
-palette of the theme. Since |seahorse| assumes a different relationship
-between its palettes, the result is a grey, rather than periwinkle,
-frametitle background.
-
-\begin{lstlisting}
-\usetheme{metropolis}
-\usecolortheme{seahorse}
-\end{lstlisting}
-
-The correct colors are chosen if the \themename outer, inner, and font themes
-are loaded seperately:
-
-\begin{lstlisting}
-\useoutertheme{metropolis}
-\useinnertheme{metropolis}
-\usefonttheme{metropolis}
-\usecolortheme{seahorse}   % or your preferred color theme
-\end{lstlisting}
-
-Please note that \themename may not use all the colors defined in your
-favourite Beamer color theme. In particular, \themename does not set a
-background color for the title; this will cause issues when using color themes
-like |whale| which set a white foreground for the title.
-
-
-\subsection{Notes on second screen}
-
-If you use the |[show notes on second screen]| option built in to Beamer and
-compile with \XeLaTeX, text on slides following the first section slide may
-be rendered in white instead of the regular colour. This is due to
-\href{http://tex.stackexchange.com/questions/288408/}{a bug} in Beamer
-or \XeLaTeX\ itself. You can work around it either by compiling with \LuaTeX\
-or by adding the following code to your preamble to reset the text color
-on each slide.
-
-\begin{lstlisting}
-\makeatletter
-\def\beamer@framenotesbegin{% at beginning of slide
-     \usebeamercolor[fg]{normal text}
-      \gdef\beamer@noteitems{}%
-      \gdef\beamer@notes{}%
-}
-\makeatother
-\end{lstlisting}
-
-
-\subsection{Standout frames with labels}
-
-Because the |standout| frame option creates a group to restrict the colour
-change to a single slide, labels defined after calling |standout| will stay
-local to the group. In other words, the following may result in a ``label undefined'' error.
-
-\begin{lstlisting}
-\begin{frame}[standout, label=conclusion]{Conclusion}
-  Awesome slide
-\end{frame}
-\end{lstlisting}
-
-To fix this problem, change the order of the keys in the frame.
-
-\begin{lstlisting}
-\begin{frame}[label=conclusion, standout]{Conclusion}
-    Awesome slide
-\end{frame}
-\end{lstlisting}
-
-This error can be unwittingly triggered if you export your slides from Emacs
-Org mode, which automatically adds labels after frame options. Alex Branham
-\href{https://github.com/matze/mtheme/issues/203}{offers} the following
-solution for Org mode users, using |org-set-property|.
-
-\begin{lstlisting}
-* Start of a frame
-   :PROPERTIES:
-   :BEAMER_opt: label=conclusion,standout
-   :END:
-\end{lstlisting}
-
-
-\subsection{Standout frames with Pandoc}
-
-With Pandoc versions prior 1.17.2 it was not possible to create standout frames
-because Pandoc only supported a specific list of frame attributes thus ignoring
-additional attributes such as  |{.standout}|.
-
+\subsection{Plain Frame}
+The |\plain| command does not work if you override the \themename color theme
+with the default beamer color theme |fly|.
 
 \section{License}
 
-\themename is licensed under a
+The theme itself is licensed under a
 \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons
-Attribution-ShareAlike 4.0 International License}.
-This means that if you change the theme and re-distribute it, you must retain
-the copyright notice header and license it under the same CC-BY-SA license.
-This does not affect any presentations that you create with the theme.
+Attribution-ShareAlike 4.0 International License}. This means that if you change
+the theme and re-distribute it, you must retain the copyright notice header and
+license it under the same CC-BY-SA license. This does not affect the
+presentation that you create with the theme.
+
 
 
 \section{Implementation}
