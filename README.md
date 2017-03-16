@@ -88,7 +88,7 @@ does not affect the presentation that you create with the theme.
 -------
 # gslab_latex
 
-This repository houses a modified version of the [Metropolis Beamer Theme](https://github.com/matze/mtheme).
+This repository houses a modified version of the [Metropolis Beamer Theme](https://github.com/matze/mtheme) from revision fe28e21fcb200258fab7527cf7b2c9da82ffcfa6.
 
 ## Installation
 
