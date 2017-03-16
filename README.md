@@ -117,7 +117,7 @@ Repository is a fork of the [Metropolis Beamer Theme](https://github.com/matze/m
 
 - Files are renamed to have the _gslab suffix.
 - Files in ./output is copied and pasted from the above steps, but beamerinnerthememetropolis_gslab.sty has a single change in line 251 where the line spacing to 1.15 instead of the defaul 1 is commented out.
-- Files in beamercolorthememetropolis_gslab.sty is modified so the background color is white instead of light grey.
+- Files in beamercolorthememetropolis_gslab.sty is modified so the background color is white instead of light grey at line 54.
 - A brief note regarding the files being modified and following the same license as the originals was also added.
 
 ## License
