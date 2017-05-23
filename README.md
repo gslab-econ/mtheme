@@ -16,8 +16,20 @@ rm -rf mtheme
 sudo texhash
 ```
 
-### Windows
-Under construction.
+### Windows (MikTeX and LyX)
+
+1. Clone this repo (e.g. using `git clone git@github.com:gslab-econ/mtheme`).
+
+2. Create a directory with the following structure: `your_dir/tex/latex/gslab_mtheme/`
+
+3. Copy all `.sty` files in `mtheme` to `your_dir/tex/latex/gslab_mtheme/`
+
+3. Open `MiKTeX Settings (Admin)` from `Start Menu`, navigate to `Roots`, click `Add`, and then add `your_dir/` to the `Roots` path. (note: only `your_dir/`, not any of the sub-directories)
+
+4. Go to `General`, click `Refresh FNDB` and then `Update Formats`.
+
+5. Navigate to Lyx toolbar menu `Tools`. Click `TeX Information` in the `Tools` menu and double check that `beamerthememetropolis_gslab.sty` is present in `LaTeX Styles`. If not, click `Reconfigure Lyx` in the `Tools` menu and then check again.
+
 
 ## Origin
 
